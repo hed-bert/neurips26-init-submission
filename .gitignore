@@ -1,0 +1,39 @@
+# Python build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Environments
+.venv/
+venv/
+.env
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Run outputs
+runs/
+checkpoints/
+wandb/
+*.log
+
+# Data (do not commit; use $HBN_DATA_DIR / $ERPCORE_DATA_DIR env vars)
+/data/
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.ckpt
+
+# Notebooks (none in this release)
+.ipynb_checkpoints/

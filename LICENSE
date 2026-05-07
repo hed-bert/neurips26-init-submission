@@ -1,0 +1,32 @@
+HED-BERT Anonymous Review Release — License Notice
+
+This source release is provided for the sole purpose of NeurIPS 2026
+double-blind peer review and follow-on reproducibility evaluation.
+
+The released source code is intended to be used together with the
+following public, non-derivative-restricted EEG corpora:
+
+  - HBN-EEG (Healthy Brain Network EEG), OpenNeuro datasets
+    ds005505 through ds005516 (releases 1 through 11).
+    Distributed under the Healthy Brain Network research-only data
+    use agreement; see https://openneuro.org for terms.
+  - ERP-CORE, NEMAR dataset nm000132. Distributed under CC-BY 4.0;
+    see https://nemar.org for terms.
+
+By using this code, you agree to:
+
+  1. Respect the license and data-use terms of HBN-EEG and ERP-CORE
+     listed above. Do not redistribute the underlying recordings.
+  2. Use this artifact for research purposes only during the review
+     window. Camera-ready will replace this anonymous distribution
+     with a permissively licensed public repository.
+  3. Not apply pretrained checkpoints to EEG recordings collected
+     without informed consent. See MODEL_CARD.md for the full misuse
+     statement.
+
+The code itself, exclusive of any bundled checkpoints, is provided
+as-is, without warranty of any kind. Pretrained weights inherit the
+source-corpus license restrictions of HBN-EEG and ERP-CORE.
+
+For the full intended-use, scope, and misuse statement, see
+MODEL_CARD.md.

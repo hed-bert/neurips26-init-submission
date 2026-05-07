@@ -1,0 +1,40 @@
+# HED-BERT no-HED ablation: masked-TF reconstruction only.
+#
+# Identical to pretrain.yaml except beta=0 disables the HED-BCE term.
+# This is the "HED supervision is load-bearing" falsification control.
+# See main paper Section 5.4 (HED ablation) and Supplement Section S1.
+
+# Pretraining objective
+hed_bce_enabled: false
+beta: 0.0           # HED-BCE disabled.
+alpha: 1.0          # Reconstruction only.
+hed_warmup_epochs: 0
+
+# Masking
+mask_ratio_tf: 0.15
+mask_ratio_evt: 0.50
+
+# Architecture (Tiny encoder)
+patch_mode: flat
+d_model: 192
+depth: 4
+num_heads: 6
+n_freqs: 6
+n_channels: 64
+
+# Optimizer / schedule
+batch_size: 32
+lr: 3.0e-4
+epochs: 100
+epochs_per_window: 8
+
+# Data
+features_dir: ${HBN_DATA_DIR}/tf_features_nonmovie
+vectorizer: ${HBN_DATA_DIR}/hed_vectorizer.pt
+holdout_ratio: 0.15
+
+# Seeds (canonical 3-seed reporting set)
+seeds: [42, 13, 7]
+
+# Provenance / sanity
+shuffle_hed: false

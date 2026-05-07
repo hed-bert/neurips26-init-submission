@@ -1,0 +1,93 @@
+[project]
+name = "hed-bert"
+version = "0.1.0"
+description = "HED-Grounded SSL for EEG Foundation Models (NeurIPS 2026 anonymous review release)"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "HED-BERT Authors" },
+]
+dependencies = [
+    "torch>=2.2",
+    "mne>=1.6",
+    "numpy>=1.26",
+    "scipy>=1.12",
+    "wandb>=0.16",
+    "pyyaml>=6.0",
+    "h5py>=3.10",
+    "pandas>=2.1",
+    "scikit-learn>=1.4",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "pyedflib>=0.1.37",
+    "hedtools>=0.9.0",
+    "scenedetect>=0.6",
+    "opencv-python-headless>=4.0",
+    "tensorboard>=2.20.0",
+    "setuptools<70",
+    # V10 Gate Lit baseline deps
+    "braindecode>=1.0",
+    "huggingface_hub>=0.20",
+    "linear-attention-transformer>=0.19.1",
+    "einops>=0.8.2",
+    # Pin torchaudio to match torch 2.10+cu128 — 2.11 requires libcudart.so.13
+    "torchaudio<2.11",
+    # V11 W2 E9 classical baselines: Riemannian tangent-space pipeline
+    "pyriemann>=0.7",
+    "safetensors>=0.7.0",
+]
+
+# [project.optional-dependencies]
+# denoise = ["speed-eeg"]
+# Install speed-eeg manually: uv pip install -e /path/to/SPEED-EEG
+
+# To install speed-eeg locally for denoising:
+#   uv pip install -e /path/to/SPEED-EEG
+# Or add to [tool.uv.sources] in a local override:
+#   speed-eeg = { path = "/path/to/SPEED-EEG", editable = true }
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "ruff>=0.9",
+    "ty>=0.0.1a1",
+    "pre-commit>=4.0",
+]
+
+# habana-frameworks is only available on Voyager (Linux, custom index)
+# Install manually on Voyager: pip install habana-frameworks
+# [project.optional-dependencies]
+# voyager = ["habana-frameworks"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["neural_vocabulary"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+extend-exclude = ["notebooks/curriculum"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "A", "SIM", "TCH"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["neural_vocabulary"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+
+[tool.ty.src]
+exclude = ["notebooks/curriculum/**", ".claude/**", "tests/**"]
+
+[tool.ty.rules]
+# habana_frameworks is only available in Gaudi containers
+unresolved-import = "ignore"
+# torch Dataset.__getitem__ generic typing is a known PyTorch limitation
+invalid-method-override = "ignore"
